@@ -42,6 +42,7 @@ def clean_webvtt(text):
 
     return ' '.join(cleaned_text)
 
+
 @app.get("/")
 async def root():
     return {"message": "Groq API Backend is running"}
@@ -77,12 +78,11 @@ async def analyze_meeting(file: UploadFile = File(...)):
                 }
             ],
             model="llama-3.3-70b-versatile",
-            temperature=1,
+            temperature=0.4,  # Lower temperature for more focused summaries
             max_tokens=1024
         )
 
         return {
-            # "analysis": chat_completion.choices[0].message.content
             "analysis": chat_completion
         }
 
